@@ -11,27 +11,28 @@
 
 void bubble_sort(int *array, size_t size)
 {
-	size_t i, j;
+	size_t i, j = 0;
 	int temp = 0;
 	bool swapped;
 
 	if (array == NULL || size == 0)
 		return;
-	for (j = 0; j < size; j++)
+	do
 	{
 		swapped = false;
-		for (i = 0; i < size - 1 - i; i++)
+		for (i = 0; i < size - 1 - j; i++)
 		{
 			if (array[i] > array[i + 1])
 			{
 				temp = array[i + 1];
 				array[i + 1] = array[i];
 				array[i] = temp;
-				swapped = true;
 				print_array(array, size);
+				swapped = true;
 			}
-			if (swapped == true)
-				break;
 		}
-	}
+		if (!swapped)
+			break;
+		j++;
+	} while (swapped);
 }
