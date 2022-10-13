@@ -1,76 +1,60 @@
 #include "sort.h"
 
 /**
- * quick_sort - function that sorts an array of integers
+ * quick_sort - A function that sorts an array of integers
  * in ascending order using the Quick sort algorithm
- * @array: array
- * @size: array's size
- * 
- * Return: void
+ * @array: The array to be sorted
+ * @size: The size of the array to be sorted
+ *
+ * Return: Nothing
  */
+
 void quick_sort(int *array, size_t size)
 {
-	if (array == NULL || size < 2)
+	
+	if (!array || size == 0)
 		return;
-
-	rec_quick_s(array, 0, size - 1, size);
+	rec_quick_sort(array, 0, size - 1, size);
 }
 
-/**
- * partition - Function to partition an array
- * @array: array
- * @lo: lower
- * @hi: higher
- * @size: array's size
- * 
- * Return: i
- */
-int partition(int *array, int lo, int hi, size_t size)
+void rec_quick_sort(int *array, int start, int end, size_t size)
 {
-	int i = lo - 1, j = lo;
-	int pivot = array[hi], aux = 0;
+	int p_index;
 
-	for (; j < hi; j++)
+	if (start >= end)
+		return;
+	p_index = partition(array, start, end, size);
+	rec_quick_sort(array, start, p_index - 1, size);
+	rec_quick_sort(array, p_index + 1, end, size);
+}
+
+int partition(int *array, int start, int end, size_t size)
+{
+	int p_index, pivot, temp, i;
+
+	p_index = start - 1;
+	pivot = end;
+
+	for (i = start; i < end; i++)
 	{
-		if (array[j] < pivot)
+		if (array[i] < array[pivot])
 		{
-			i++;
-			if (array[i] != array[j])
+			p_index++;
+			if (array[i] != array[p_index])
 			{
-				aux = array[i];
-				array[i] = array[j];
-				array[j] = aux;
+				temp = array[i];
+				array[i] = array[p_index];
+				array[p_index] = temp;
 				print_array(array, size);
 			}
 		}
 	}
-	if (array[i + 1] != array[hi])
+	if (array[p_index + 1] != array[pivot])
 	{
-		aux = array[i + 1];
-		array[i + 1] = array[hi];
-		array[hi] = aux;
+		temp = array[pivot];
+		array[pivot] = array[p_index + 1];
+		array[p_index + 1] = temp;
 		print_array(array, size);
 	}
-	return (i + 1);
-}
-
-/**
- * rec_quick_s - Recursive quick sort
- * @array: given array
- * @lo: lower
- * @hi:higher
- * @size: array's size
- * 
- * Return: void
- */
-void rec_quick_s(int *array, int lo, int hi, size_t size)
-{
-	int pivot;
-
-	if (lo < hi)
-	{
-		pivot = partition(array, lo, hi, size);
-		rec_quick_s(array, lo, pivot - 1, size);
-		rec_quick_s(array, pivot + 1, hi, size);
-	}
+	return (p_index + 1);
 }
