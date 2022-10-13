@@ -11,12 +11,21 @@
 
 void quick_sort(int *array, size_t size)
 {
-	
 	if (!array || size == 0)
 		return;
 	rec_quick_sort(array, 0, size - 1, size);
 }
 
+/**
+ * rec_quick_sort - Calls the prtition function as long as 
+ * the start is less than end
+ * @array: The array to be partitioned
+ * @start: The first index of the array
+ * @end: The last index of the array
+ * @size: The size of the array
+ *
+ * Return: void
+ */
 void rec_quick_sort(int *array, int start, int end, size_t size)
 {
 	int p_index;
@@ -28,6 +37,15 @@ void rec_quick_sort(int *array, int start, int end, size_t size)
 	rec_quick_sort(array, p_index + 1, end, size);
 }
 
+/**
+ * partition - Partitions an array of integers
+ * @array: The array to be partitioned
+ * @start: The first index of the array
+ * @end: The last index of the array
+ * @size: The size of the array
+ *
+ * Return: The paritition index of the partitioned array
+ */
 int partition(int *array, int start, int end, size_t size)
 {
 	int p_index, pivot, temp, i;
