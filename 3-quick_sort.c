@@ -17,7 +17,7 @@ void quick_sort(int *array, size_t size)
 }
 
 /**
- * rec_quick_sort - Calls the prtition function as long as 
+ * rec_quick_sort - Calls the prtition function as long as
  * the start is less than end
  * @array: The array to be partitioned
  * @start: The first index of the array
