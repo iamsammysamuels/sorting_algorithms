@@ -16,7 +16,7 @@ void cocktail_sort_list(listint_t **list)
 	temp = *list;
 
 	if (!list || !*list)
-		return
+		return;
 
 	do {
 		swapped = false;
