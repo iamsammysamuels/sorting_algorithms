@@ -15,6 +15,9 @@ void cocktail_sort_list(listint_t **list)
 	curr = *list;
 	temp = *list;
 
+	if (!list || !*list)
+		return
+
 	do {
 		swapped = false;
 		while (curr->next)
